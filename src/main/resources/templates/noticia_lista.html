@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/formulario.css">
+    </head>
+    <body>
+        <div>TODO write content</div>
+       
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Id:</th>
+                    <th>Titulo:</th>
+                    <th>Cuerpo:</th>
+                    <th>Acciones</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="noticia : ${elemento}">
+                    
+                    <td th:text="${noticia.id}"></td>
+                    <td th:text="${noticia.titulo}"></td>
+                    <td th:text="${noticia.cuerpo}"></td>
+                    <td> 
+                        <button><a type="Button" th:href="@{/noticia/modificar/{id}(id=${noticia.id})}">Editar</a></button>
+                        <button><a type="Button" th:href="@{/noticia/eliminar/{id}(id=${noticia.id})}" >Eliminar</a></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>
+

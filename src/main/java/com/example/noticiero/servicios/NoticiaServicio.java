@@ -8,6 +8,7 @@ import com.example.noticiero.entidades.Noticia;
 import com.example.noticiero.excepciones.MiException;
 import com.example.noticiero.repositorios.NoticiaRepositorio;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,5 +70,9 @@ public class NoticiaServicio {
         if(cuerpo.isEmpty() || cuerpo == null){
             throw new MiException("El cuerpo no puede ser nulo");
         }
+    }
+    public List<Noticia> listarNoticias(){
+        List<Noticia> lista = ns.findAll();
+        return lista;
     }
 }
