@@ -44,20 +44,41 @@ public class NoticiaControlador {
         
         return "index.html";
     }
-    @PostMapping("/modificar")
+    @GetMapping("/modificar/{id}")
     //Modificar
-    public String modificar(@RequestParam(required=false)String id, @RequestParam String titulo, @RequestParam String cuerpo, ModelMap modelo){
-        try {
-            ns.modificaNoticia(id, titulo, cuerpo);
-            modelo.put("Exito","La noticia se modifico exitosamente");
-            
-            
-        } catch (MiException ex) {
-            modelo.put("Error", ex.getMessage());
-            return "noticia_modificar_form.html";
+    public String modificar(@PathVariable String id, ModelMap modelo){
+       try {
+        // Obtener la noticia por el ID
+        Noticia noticia = ns.buscarNoticiaPorId(id);
+
+        // Verificar si la noticia existe
+        if (noticia != null) {
+            // Agregar la noticia al modelo
+            modelo.addAttribute("noticia", noticia);
+            return "noticia_modificar.html";
+        } else {
+            modelo.addAttribute("Error", "La noticia con ID " + id + " no existe");
+            return "error.html";
         }
-        return "index.html";
+    } catch (Exception ex) {
+        modelo.addAttribute("Error", ex.getMessage());
+        return "error.html";
     }
+       
+    }
+    @PostMapping("/modificar/{id}")
+public String procesarModificacion(@PathVariable String id, @RequestParam String titulo, @RequestParam String cuerpo, ModelMap modelo) {
+    try {
+        // Lógica para modificar la noticia con los nuevos datos
+        ns.modificaNoticia(id, titulo, cuerpo);
+
+        modelo.put("Exito", "La noticia se modificó exitosamente");
+        return "noticia_lista.html";  // o redirige a donde desees después de la modificación
+    } catch (MiException ex) {
+        modelo.put("Error", ex.getMessage());
+        return "noticia_modificar.html";  // o redirige nuevamente al formulario de modificación
+    }
+}
     @GetMapping("/listar")
     public String listarNoticias(Model modelo) throws MiException, Exception{
         try {
