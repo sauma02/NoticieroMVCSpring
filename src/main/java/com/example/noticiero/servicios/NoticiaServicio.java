@@ -7,9 +7,9 @@ package com.example.noticiero.servicios;
 import com.example.noticiero.entidades.Noticia;
 import com.example.noticiero.excepciones.MiException;
 import com.example.noticiero.repositorios.NoticiaRepositorio;
-import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,7 +50,7 @@ public class NoticiaServicio {
             ns.delete(n1);
         }
     }
-    public Noticia buscarNoticiaPorId( String id){
+    public Noticia buscarNoticiaPorId(String id){
         Optional<Noticia> res = ns.findById(id);
         if(res.isPresent()){
             Noticia n1 = res.get();
