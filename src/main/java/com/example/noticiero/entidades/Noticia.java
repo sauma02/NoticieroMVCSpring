@@ -5,13 +5,15 @@
 package com.example.noticiero.entidades;
 
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+
 import org.hibernate.annotations.GeneratorType;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.Id;
+
 
 /**
  *
@@ -19,7 +21,7 @@ import org.springframework.data.annotation.Id;
  */
 @Entity
 public class Noticia {
-    @javax.persistence.Id
+   
     @Id
     @GeneratedValue(generator="uuid")
     @GenericGenerator(name="uuid", strategy="uuid2")

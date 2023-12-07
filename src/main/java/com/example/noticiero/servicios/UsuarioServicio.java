@@ -8,9 +8,10 @@ import com.example.noticiero.entidades.Usuario;
 import com.example.noticiero.enumeraciones.Rol;
 import com.example.noticiero.excepciones.MiException;
 import com.example.noticiero.repositorios.UsuarioRepositorio;
+import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -41,6 +42,17 @@ public class UsuarioServicio implements UserDetailsService{
         
         
     }
+    public Usuario buscarUsuarioPorEmail(String email){
+         return ur.buscarPorEmail(email);   
+    }
+    private boolean emailEnUso(String email){
+        Usuario u1 = ur.buscarPorEmail(email);
+        if(u1.getEmail() == email){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public void validar(String nombre, String email, String password, String password2 ) throws MiException{
       
         if(nombre.isEmpty() || nombre == null){
@@ -55,6 +67,10 @@ public class UsuarioServicio implements UserDetailsService{
           if(!password.equals(password2)){
             throw new MiException("Las contraseñas ingresadas deben ser iguales");
         }
+          if(this.emailEnUso(email)){
+              throw new MiException("El correo ya se encuentra en uso");
+          }
+         
     }
 
     @Override
