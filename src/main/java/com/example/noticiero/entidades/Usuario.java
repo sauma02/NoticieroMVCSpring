@@ -5,10 +5,11 @@
 package com.example.noticiero.entidades;
 
 import com.example.noticiero.enumeraciones.Rol;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.Id;
 
